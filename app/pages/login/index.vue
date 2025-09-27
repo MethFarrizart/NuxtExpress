@@ -74,7 +74,10 @@ const form = reactive<logInForm>({
 });
 
 const login = async () => {
-  await ifetch(userRoute.logIn, form);
+  const res = await ifetch(userRoute.logIn, form);
+  if (res.status == 200) {
+    return navigateTo("test");
+  }
 };
 
 const onReset = () => {

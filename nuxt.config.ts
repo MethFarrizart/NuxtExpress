@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import { vueI18nConfig } from "./i18n.config";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: false },
@@ -8,11 +11,21 @@ export default defineNuxtConfig({
     dirs: ["~/components"],
   },
 
+  i18n: {
+    locales: [
+      { code: "kh", name: "Khmer", file: "kh.js" },
+      { code: "en", name: "English", file: "en.js" },
+    ],
+    defaultLocale: "kh",
+    langDir: "locales/",
+    vueI18n: "./i18n.config.ts",
+  },
+
   build: {
     transpile: ["tailwindcss"],
   },
 
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n"],
   plugins: ["~/plugins/sweetalert.ts"],
 
   // connect to express
@@ -21,15 +34,4 @@ export default defineNuxtConfig({
       "/api/": { target: process.env.NUXT_PUBLIC_API_URL, changeOrigin: true },
     },
   },
-
-  // runtimeConfig: {
-  //   // Private vars (server-side only)
-  //   jwtSecret: process.env.JWT_SECRET_KEY,
-  //   jwtExpiresIn: process.env.JWT_EXPIRES_IN,
-
-  //   // Public vars (exposed to browser)
-  //   public: {
-  //     apiUrl: process.env.NUXT_PUBLIC_API_URL,
-  //   },
-  // },
 });

@@ -64,12 +64,14 @@ export const logIn = async (req, res) => {
 
     // store cookie
     res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
+      httpOnly: false,
+      secure: false,
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ message: "Log In Successful", token: token });
+    res
+      .status(200)
+      .json({ message: "Log In Successful", status: 200, token: token });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -77,16 +79,21 @@ export const logIn = async (req, res) => {
 
 export const logOut = async (req, res) => {
   const { token } = req.body;
-  if (token) {
-    // get cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
+  console.log(token);
+  // if (token) {
+  //   // get cookie
+  //   res.cookie("token", token, {
+  //     httpOnly: true,
+  //     secure: true,
+  //     maxAge: 24 * 60 * 60 * 1000,
+  //   });
 
-    // clear cookie
-    res.clearCookie("token", { path: "/", httpOnly: true, secure: true });
-    res.json({ message: "Logged out" });
-  }
+  //   // clear cookie
+  //   res.clearCookie("token", {
+  //     path: "/login",
+  //     httpOnly: false,
+  //     secure: false,
+  //   });
+  //   res.json({ message: "Logged out" });
+  // }
 };

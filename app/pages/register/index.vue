@@ -63,6 +63,9 @@ import { ref, reactive } from "vue";
 import { userRoute } from "~/composables/routes/user";
 import { ifetch } from "@/components/ifetch";
 
+// const { t } = useI18n();
+// console.log(t);
+
 interface registerForm {
   username: string;
   password: string;
