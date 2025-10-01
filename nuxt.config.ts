@@ -6,10 +6,13 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: false },
   ssr: false,
-  css: ["./app/assets/css/tailwind.css"],
-  components: {
-    dirs: ["~/components"],
-  },
+  css: ["./app/assets/css/tailwind.css", "./app/assets/css/main.scss"],
+  components: [
+    {
+      global: true,
+      dirs: ["~/components"],
+    },
+  ],
 
   i18n: {
     locales: [

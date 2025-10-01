@@ -27,7 +27,7 @@
                   @click="emit('addItem')"
                 >
                   <Icon name=" bi-plus-circle"></Icon>
-                  {{ t("add") }}
+                  Add
                 </button>
               </div>
 
@@ -38,7 +38,7 @@
                   @click="emit('refreshPage')"
                 >
                   <Icon name="bi-arrow-clockwise"></Icon>
-                  <span> {{ t("refresh") }}</span>
+                  <span> {{ $t("refresh") }} </span>
                 </button>
               </div>
 
@@ -64,7 +64,7 @@
                   class="main-btn w-auto px-4 py-1"
                   @click="emit('getDataByFilter')"
                 >
-                  {{ t("filter") }}
+                  Filter
                 </button>
               </div>
             </div>
@@ -146,9 +146,7 @@
 
                     <div class="cursor-default">
                       {{
-                        props.sortBy == ""
-                          ? t("sort")
-                          : t("sort_by") + " : " + `${sortByLabel}`
+                        props.sortBy == "" ? "Sort" : "Sort By" + " : " + `${sortByLabel}`
                       }}
                     </div>
 
@@ -179,9 +177,7 @@
                           handleDropItemClick();
                         "
                       >
-                        <div class="p-2">
-                          {{ t("reset") }}
-                        </div>
+                        <div class="p-2">Reset</div>
                       </div>
 
                       <div
@@ -220,7 +216,7 @@
                     />
 
                     <div class="cursor-default">
-                      {{ props.sortType == "asc" ? t("ascending") : t("descending") }}
+                      {{ props.sortType == "asc" ? "Ascending" : "descending" }}
                     </div>
 
                     <Icon name="ic:baseline-arrow-drop-down" class="-mt-1"></Icon>
@@ -250,9 +246,7 @@
                           handleDropItemClick();
                         "
                       >
-                        <div class="p-2">
-                          {{ t("ascending") }}
-                        </div>
+                        <div class="p-2">Ascending</div>
                       </div>
 
                       <div
@@ -263,9 +257,7 @@
                           handleDropItemClick();
                         "
                       >
-                        <div class="p-2">
-                          {{ t("descending") }}
-                        </div>
+                        <div class="p-2">Descending</div>
                       </div>
                     </div>
                   </transition>
@@ -276,7 +268,7 @@
                 <!-- set search box -->
                 <div v-if="props.setSearchBox" class="relative">
                   <input
-                    :placeholder="t('search')"
+                    placeholder="Search"
                     type="text"
                     @input="emit('filterSearch')"
                     v-model="props.filter.search"
@@ -297,7 +289,7 @@
                     @click="emit('printPDF')"
                   >
                     <i class="bi bi-printer"></i>
-                    {{ t("print") }}
+                    Print
                   </b-button>
                 </div>
               </div>

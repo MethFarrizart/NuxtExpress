@@ -9,20 +9,22 @@ import { userRoute } from "~/composables/routes/user";
 import { ifetch } from "@/components/ifetch";
 import Cookies from "js-cookie";
 import { onMounted } from "vue";
+import AdminForm from "~/components/AdminForm.vue";
 
 const arr = [1, 5, 5, 6, 4];
 const sum = test(arr); // test here is a function auto-import from shared/utils/test.ts
 
-let cookie = ref(null);
+let token = ref(null);
 
 onMounted(() => {
-  cookie = Cookies.get("token");
-  console.log(cookie);
+  token = Cookies.get("token");
 });
 
 const logout = async () => {
-  await ifetch(userRoute.logOut, cookie);
+  // use credentials: "include" will see token
+  const res = await ifetch(userRoute.logOut, { credentials: "include" });
+  if (res.status == 200) {
+    return navigateTo("login");
+  }
 };
 </script>
-
-<style lang="scss" scoped></style>

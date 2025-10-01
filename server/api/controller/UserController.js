@@ -1,6 +1,7 @@
 import User from "../model/Users.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import cookie from "cookie";
 
 export const register = async (req, res) => {
   try {
@@ -78,22 +79,14 @@ export const logIn = async (req, res) => {
 };
 
 export const logOut = async (req, res) => {
-  const { token } = req.body;
-  console.log(token);
-  // if (token) {
-  //   // get cookie
-  //   res.cookie("token", token, {
-  //     httpOnly: true,
-  //     secure: true,
-  //     maxAge: 24 * 60 * 60 * 1000,
-  //   });
-
-  //   // clear cookie
-  //   res.clearCookie("token", {
-  //     path: "/login",
-  //     httpOnly: false,
-  //     secure: false,
-  //   });
-  //   res.json({ message: "Logged out" });
-  // }
+  const cookies = cookie.parse(req.headers.cookie || "");
+  const token = cookies.token;
+  if (token) {
+    // clear cookie
+    res.clearCookie("token", {
+      httpOnly: false,
+      secure: false,
+    });
+    res.json({ message: "Logged out", status: 200 });
+  }
 };
